@@ -1,10 +1,26 @@
-import { Container, Box, Button } from 'bloomer';
+import Link from 'next/link';
+import { Container, Title, Button, Columns, Column } from 'bloomer';
 import 'bulma/css/bulma.css';
 
-const Index = () => (
-  <Container>
-    <Box>Hello World!</Box>
-    <Button isColor='success' hasTextAlign='centered'>Hello!</Button>
+const Index = () => ( 
+  <Container isFluid style={{ marginTop: 20 }}>
+    <Title isSize={1} hasTextAlign='centered'>Condovive</Title>
+    <Columns>
+      <Column></Column>
+      <Column></Column>
+      <Column hasTextAlign='centered'>
+        <Link href='/login'>
+          <Button isColor='primary' hasTextAlign='centered'>Iniciar sesion</Button>
+        </Link>
+      </Column>
+      <Column hasTextAlign='centered'>
+        <Link href='/signup'>
+          <Button isColor='primary' hasText_align='centered'>Registrarse</Button>
+        </Link>
+      </Column>
+      <Column></Column>
+      <Column></Column>
+    </Columns>
   </Container>
 )
 
