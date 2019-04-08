@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import { Component } from 'react'
-import { 
+import Router from 'next/router'
+import {
   Container, 
   Title, 
   Field, 
@@ -12,8 +13,8 @@ import {
   Control
 } from 'bloomer';
 import AccountType from "../components/account_type";
-import fetch from "isomorphic-unfetch";
-import API_URL from "../config/api";
+import fetch from 'isomorphic-unfetch';
+import API_URL from '../config/api';
 
 
 export default class Signup extends Component {
@@ -93,82 +94,87 @@ export default class Signup extends Component {
     });
     let data = await response.json();
 
-    console.log(data);
+    localStorage.setItem('token', data.auth_token);
+
+    Router.push('/authenticated', '/authenticated');
+
   }
 
   render() {
     return (
       <Container isFluid style={{ marginTop: 20 }}>
         <Title isSize={1} hasTextAlign='centered'>Condovive</Title>
-        <Field isHorizontal>
-          <FieldLabel>
-            <Label>Usuario</Label>
-          </FieldLabel>
-          <FieldBody>
-            <Field>
-              <Input placeholder='Nombre' name="userName" onChange={this.handleInput} />
-            </Field>
-            <Field>
-              <Input placeholder='Correo electronico' name="userEmail" onChange={this.handleInput} />
-            </Field>
-          </FieldBody>
-        </Field>
-        <Field isHorizontal>
-          <FieldLabel />
-          <FieldBody>
-            <Field>
-              <Input type="password" placeholder='Contraseña' name="userPassword" onChange={this.handleInput} />
-            </Field>
-            <Field>
-              <Input type="password" placeholder='Confirme su contraseña' name="userPasswordConfirm" onChange={this.handleInput} />
-            </Field>
-          </FieldBody>
-        </Field>
-        <Field isHorizontal style={{ marginTop: 50 }}>
-          <FieldLabel>
-            <Label>Informacion personal</Label>
-          </FieldLabel>
-          <FieldBody>
-            <Field>
-              <Input placeholder='Nombre' name="accountName" onChange={this.handleInput} />
-            </Field>
-            <Field>
-              <Input placeholder='Correo electronico' name="accountEmail" onChange={this.handleInput} />
-            </Field>
-          </FieldBody>
-        </Field>
-        <Field isHorizontal>
-          <FieldLabel />
-          <FieldBody>
-            <Field>
-              <Input placeholder='Telefono' name="accountPhone" onChange={this.handleInput} />
-            </Field>
-            <Field>
-              <AccountType onAccountTypeChange={this.handleAccountType} />
-            </Field>
-          </FieldBody>
-        </Field>
-        <Field isHorizontal style={{ marginTop: 50 }}>
-          <FieldLabel>
-            <Label>Condominio</Label>
-          </FieldLabel>
-          <FieldBody>
-            <Field>
-              <Input placeholder='Nombre' name="condoName" onChange={this.handleInput} />
-            </Field>
-            <Field>
-              <Input placeholder='Numero de unidades' name="unitNumber" onChange={this.handleInput} />
-            </Field>
-          </FieldBody>
-        </Field>
-        <Field isHorizontal>
-          <FieldLabel />
-          <FieldBody>
-            <Control>
-              <Button onClick={this.onFormSubmit}>Registrarse</Button>
-            </Control>
-          </FieldBody>
-        </Field>
+        <form onSubmit={this.onFormSubmit}>
+          <Field isHorizontal>
+            <FieldLabel>
+              <Label>Usuario</Label>
+            </FieldLabel>
+            <FieldBody>
+              <Field>
+                <Input placeholder='Nombre' name="userName" onChange={this.handleInput} />
+              </Field>
+              <Field>
+                <Input placeholder='Correo electronico' name="userEmail" onChange={this.handleInput} />
+              </Field>
+            </FieldBody>
+          </Field>
+          <Field isHorizontal>
+            <FieldLabel />
+            <FieldBody>
+              <Field>
+                <Input type="password" placeholder='Contraseña' name="userPassword" onChange={this.handleInput} />
+              </Field>
+              <Field>
+                <Input type="password" placeholder='Confirme su contraseña' name="userPasswordConfirm" onChange={this.handleInput} />
+              </Field>
+            </FieldBody>
+          </Field>
+          <Field isHorizontal style={{ marginTop: 50 }}>
+            <FieldLabel>
+              <Label>Informacion personal</Label>
+            </FieldLabel>
+            <FieldBody>
+              <Field>
+                <Input placeholder='Nombre' name="accountName" onChange={this.handleInput} />
+              </Field>
+              <Field>
+                <Input placeholder='Correo electronico' name="accountEmail" onChange={this.handleInput} />
+              </Field>
+            </FieldBody>
+          </Field>
+          <Field isHorizontal>
+            <FieldLabel />
+            <FieldBody>
+              <Field>
+                <Input placeholder='Telefono' name="accountPhone" onChange={this.handleInput} />
+              </Field>
+              <Field>
+                <AccountType onAccountTypeChange={this.handleAccountType} />
+              </Field>
+            </FieldBody>
+          </Field>
+          <Field isHorizontal style={{ marginTop: 50 }}>
+            <FieldLabel>
+              <Label>Condominio</Label>
+            </FieldLabel>
+            <FieldBody>
+              <Field>
+                <Input placeholder='Nombre' name="condoName" onChange={this.handleInput} />
+              </Field>
+              <Field>
+                <Input placeholder='Numero de unidades' name="unitNumber" onChange={this.handleInput} />
+              </Field>
+            </FieldBody>
+          </Field>
+          <Field isHorizontal>
+            <FieldLabel />
+            <FieldBody>
+              <Control>
+                <Button onClick={this.onFormSubmit}>Registrarse</Button>
+              </Control>
+            </FieldBody>
+          </Field>
+        </form>
       </Container>
     )
   }
