@@ -1,4 +1,3 @@
-import 'bulma/css/bulma.css';
 import { Component } from 'react';
 import Router from "next/router";
 import {
@@ -30,18 +29,26 @@ export default class Authenticated extends Component {
     } else {
       this.setState({ token: localStorage.getItem('token') });
 
-      const res = await fetch(API_URL + '/users', {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-      });
-      const data = await res.json();
+      try {
+        const res = await fetch(API_URL + '/users', {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          }
+        });
+        const data = await res.json();
 
-      this.setState({
-        users: data,
-      });
+        if (res.ok) {
+          this.setState({
+            users: data,
+          });
+        } else {
+          console.log(data.message);
+        }
+      } catch (e) {
+        console.log(e.message);
+      }
     }
   }
 

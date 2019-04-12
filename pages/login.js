@@ -1,5 +1,5 @@
-import 'bulma/css/bulma.css'; 
-import { 
+import Router from "next/dist/client/router";
+import {
   Container, 
   Title, 
   Field, 
@@ -11,8 +11,8 @@ import {
   Control
 } from 'bloomer';
 import fetch from "isomorphic-unfetch";
+
 import API_URL from "../config/api";
-import Router from "next/dist/client/router";
 
 export default class Login extends React.Component {
   constructor() {
@@ -39,22 +39,29 @@ export default class Login extends React.Component {
   }
 
   async onFormSubmit(e) {
-    let response = await fetch(API_URL + '/login', {
-      method: 'POST',
-      body: JSON.stringify(this.state),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+    try {
+      const response = await fetch(API_URL + '/login', {
+        method: 'POST',
+        body: JSON.stringify(this.state),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await response.json();
+      if (response.ok) {
+        localStorage.setItem('token', data.auth_token);
+
+        Router.push('/authenticated', '/authenticated');
+      }  else {
+        console.log(data.message);
       }
-    });
-    let data = await response.json();
-
-    localStorage.setItem('token', data.auth_token);
-
-    Router.push('/authenticated', '/authenticated');
+    } catch(e) {
+      console.log(e.message)
+    }
   }
 
-  render() {     
+  render() {
     return (
       <Container isFluid style={{ marginTop: 20 }}>
         <Title isSize={1} hasTextAlign='centered'>Condovive</Title>

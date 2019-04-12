@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -656,17 +656,6 @@ function _typeof(obj) {
 }
 
 module.exports = _typeof;
-
-/***/ }),
-
-/***/ "./node_modules/bulma/css/bulma.css":
-/*!******************************************!*\
-  !*** ./node_modules/bulma/css/bulma.css ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
 
 /***/ }),
 
@@ -1316,15 +1305,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var bloomer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! bloomer */ "bloomer");
 /* harmony import */ var bloomer__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(bloomer__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var bulma_css_bulma_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! bulma/css/bulma.css */ "./node_modules/bulma/css/bulma.css");
-/* harmony import */ var bulma_css_bulma_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(bulma_css_bulma_css__WEBPACK_IMPORTED_MODULE_9__);
 
 
 
 
 
 var _jsxFileName = "/Users/juangomez/code/condoviveapp/pages/index.js";
-
 
 
 
@@ -1359,7 +1345,7 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 22
+          lineNumber: 21
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(bloomer__WEBPACK_IMPORTED_MODULE_8__["Title"], {
@@ -1367,39 +1353,39 @@ function (_Component) {
         hasTextAlign: "centered",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 23
+          lineNumber: 22
         },
         __self: this
       }, "Condovive"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(bloomer__WEBPACK_IMPORTED_MODULE_8__["Columns"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 24
+          lineNumber: 23
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(bloomer__WEBPACK_IMPORTED_MODULE_8__["Column"], {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 24
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(bloomer__WEBPACK_IMPORTED_MODULE_8__["Column"], {
         __source: {
           fileName: _jsxFileName,
           lineNumber: 25
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(bloomer__WEBPACK_IMPORTED_MODULE_8__["Column"], {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 26
-        },
-        __self: this
-      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(bloomer__WEBPACK_IMPORTED_MODULE_8__["Column"], {
         hasTextAlign: "centered",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 27
+          lineNumber: 26
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_6___default.a, {
         href: "/login",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 28
+          lineNumber: 27
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(bloomer__WEBPACK_IMPORTED_MODULE_8__["Button"], {
@@ -1407,21 +1393,21 @@ function (_Component) {
         hasTextAlign: "centered",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 29
+          lineNumber: 28
         },
         __self: this
       }, "Iniciar sesion"))), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(bloomer__WEBPACK_IMPORTED_MODULE_8__["Column"], {
         hasTextAlign: "centered",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 32
+          lineNumber: 31
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_6___default.a, {
         href: "/signup",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 33
+          lineNumber: 32
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(bloomer__WEBPACK_IMPORTED_MODULE_8__["Button"], {
@@ -1429,19 +1415,19 @@ function (_Component) {
         hasText_align: "centered",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 34
+          lineNumber: 33
         },
         __self: this
       }, "Registrarse"))), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(bloomer__WEBPACK_IMPORTED_MODULE_8__["Column"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 37
+          lineNumber: 36
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(bloomer__WEBPACK_IMPORTED_MODULE_8__["Column"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 38
+          lineNumber: 37
         },
         __self: this
       })));
@@ -1455,7 +1441,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 5:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

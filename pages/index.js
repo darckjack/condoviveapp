@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Router from 'next/router'
 import { Component } from 'react';
 import { Container, Title, Button, Columns, Column } from 'bloomer';
-import 'bulma/css/bulma.css';
 
 
 export default class Index extends Component {
