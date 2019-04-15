@@ -37,6 +37,10 @@ export default class SignUpForm extends Component {
     });
   };
 
+  handleError = message => {
+    this.props.onError(message);
+  };
+
   handleAccountType = accountType => {
     this.setState({ account: { accountType: parseInt(accountType) }});
   };
@@ -148,7 +152,7 @@ export default class SignUpForm extends Component {
             </div>
           </div>
           <div className="col-md-6">
-            <AccountType onAccountTypeChange={this.handleAccountType} />
+            <AccountType onAccountTypeChange={this.handleAccountType} onError={this.handleError} />
           </div>
         </div>
 
@@ -177,7 +181,7 @@ export default class SignUpForm extends Component {
             </div>
           </div>
         </div>
-        <button onClick={this.handleFormSubmit} className="btn btn-primary" style={{ marginTop: 20 }}>
+        <button type='submit'  onClick={this.handleFormSubmit} className="btn btn-primary" style={{ marginTop: 20 }}>
           Registrarse
         </button>
       </form>

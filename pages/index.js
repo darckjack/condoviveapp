@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Router from 'next/router'
 import { Component } from 'react';
-import { Container, Title, Button, Columns, Column } from 'bloomer';
+import { Button } from 'reactstrap';
 
 
 export default class Index extends Component {
@@ -18,25 +18,18 @@ export default class Index extends Component {
 
   render() {
     return (
-      <Container isFluid style={{ marginTop: 20 }}>
-        <Title isSize={1} hasTextAlign='centered'>Condovive</Title>
-        <Columns>
-          <Column></Column>
-          <Column></Column>
-          <Column hasTextAlign='centered'>
-            <Link href='/login'>
-              <Button isColor='primary' hasTextAlign='centered'>Iniciar sesion</Button>
-            </Link>
-          </Column>
-          <Column hasTextAlign='centered'>
-            <Link href='/signup'>
-              <Button isColor='primary' hasText_align='centered'>Registrarse</Button>
-            </Link>
-          </Column>
-          <Column></Column>
-          <Column></Column>
-        </Columns>
-      </Container>
+      <div className='row'>
+        <div className="col-md-2 offset-md-4">
+          <Link href='/login'>
+            <Button color='primary'>Iniciar sesion</Button>
+          </Link>
+        </div>
+        <div className="col-md-2">
+          <Link href='/signup'>
+            <Button color='primary'>Registrarse</Button>
+          </Link>
+        </div>
+      </div>
     )
   }
 }

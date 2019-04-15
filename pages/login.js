@@ -1,26 +1,17 @@
 import Router from "next/dist/client/router";
-import {
-  Container, 
-  Title, 
-  Field, 
-  FieldLabel, 
-  Label, 
-  FieldBody,
-  Input,
-  Button,
-  Control
-} from 'bloomer';
 import fetch from "isomorphic-unfetch";
 
 import API_URL from "../config/api";
+import LoginForm from "../components/login_form";
+import { Alert } from "reactstrap";
 
 export default class Login extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      email: "",
-      password: ""
+      error: false,
+      errorMessage: ''
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -38,57 +29,60 @@ export default class Login extends React.Component {
     });
   }
 
-  async onFormSubmit(e) {
+  onDismiss = () => {
+    this.setState({
+      error: false
+    })
+  };
+
+  async onFormSubmit(formData) {
+    const requestBody = {
+      email: formData.email,
+      password: formData.password
+    };
+
+
+    console.log(requestBody);
+
     try {
       const response = await fetch(API_URL + '/login', {
         method: 'POST',
-        body: JSON.stringify(this.state),
+        body: JSON.stringify(requestBody),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
       });
       const data = await response.json();
+
       if (response.ok) {
         localStorage.setItem('token', data.auth_token);
 
         Router.push('/authenticated', '/authenticated');
-      }  else {
+      } else {
+        this.setState({
+          error: true,
+          errorMessage: data.message
+        });
         console.log(data.message);
       }
-    } catch(e) {
-      console.log(e.message)
+    } catch (e) {
+      this.setState({
+        error: true,
+        errorMessage: e.message
+      });
+      console.log(e.message);
     }
   }
 
   render() {
     return (
-      <Container isFluid style={{ marginTop: 20 }}>
-        <Title isSize={1} hasTextAlign='centered'>Condovive</Title>
-        <form onSubmit={this.onFormSubmit}>
-          <Field isHorizontal>
-            <FieldLabel isNormal>
-              <Label>Acceso</Label>
-            </FieldLabel>
-            <FieldBody>
-              <Field>
-                <Input placeholder='Correo electronico' name='email' onChange={this.handleInput} />
-              </Field>
-              <Field>
-                <Input placeholder='Contraseña' type='password' name='password' onChange={this.handleInput} />
-              </Field>
-            </FieldBody>
-          </Field>
-          <Field isHorizontal>
-            <FieldLabel />
-            <FieldBody>
-              <Control>
-                <Button onClick={this.onFormSubmit}>Ingresar</Button>
-              </Control>
-            </FieldBody>
-          </Field>
-        </form>
-      </Container>
-    );
+      <div>
+        <Alert color='danger' isOpen={this.state.error} toggle={this.onDismiss}>
+          {this.state.errorMessage}
+        </Alert>
+        <LoginForm onFormSubmit={this.onFormSubmit} />
+      </div>
+  );
   }
 }

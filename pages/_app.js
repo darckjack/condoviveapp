@@ -1,6 +1,5 @@
 import React from 'react';
 import App, { Container } from 'next/app';
-import 'bulma/css/bulma.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -20,7 +19,10 @@ class Condovive extends App {
 
     return (
       <Container>
-        <Component {...pageProps} />
+        <div className="container">
+          <h1 className='text-center'>Condovive</h1>
+          <Component {...pageProps} />
+        </div>
       </Container>
     );
   }

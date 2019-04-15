@@ -1,9 +1,8 @@
-import { Component } from 'react'
 import fetch from "isomorphic-unfetch";
 import API_URL from "../config/api";
 
 
-export default class AccountType extends Component{
+export default class AccountType extends React.Component{
   constructor(props) {
     super(props);
 
@@ -22,9 +21,11 @@ export default class AccountType extends Component{
       if (res.ok) {
         this.setState({ types: data });
       } else {
+        this.props.onError(data.message);
         console.log(data.message);
       }
     } catch (e) {
+      this.props.onError(e.message);
       console.log(e.message);
     }
   }

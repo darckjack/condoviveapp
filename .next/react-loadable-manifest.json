@@ -7,10 +7,10 @@
       "publicPath": "static/chunks/0.js"
     }
   ],
-  "bulma/css/bulma.css": [
+  "bootstrap/dist/css/bootstrap.min.css": [
     {
-      "id": "./node_modules/bulma/css/bulma.css",
-      "name": "./node_modules/bulma/css/bulma.css",
+      "id": "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+      "name": "./node_modules/bootstrap/dist/css/bootstrap.min.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
@@ -19,20 +19,6 @@
     {
       "id": 1,
       "name": null,
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    },
-    {
-      "id": 2,
-      "name": null,
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    }
-  ],
-  "bootstrap/dist/css/bootstrap.min.css": [
-    {
-      "id": "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-      "name": "./node_modules/bootstrap/dist/css/bootstrap.min.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }

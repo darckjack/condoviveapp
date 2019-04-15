@@ -1,12 +1,9 @@
 import { Component } from 'react'
 import Router from 'next/router'
-import {
-  Container, 
-  Title
-} from 'bloomer';
 import fetch from 'isomorphic-unfetch';
 import API_URL from '../config/api';
 import SignUpForm from "../components/signup_form";
+import { Alert } from "reactstrap";
 
 
 export default class Signup extends Component {
@@ -14,37 +11,38 @@ export default class Signup extends Component {
     super(props);
 
     this.state = {
-      request: {},
+      error: false,
+      errorMessage: ''
     };
 
-    this.handleAccountType = this.handleAccountType.bind(this);
-    this.handleInput = this.handleInput.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  handleInput(e) {
-    let value = e.target.value;
-    let name = e.target.name;
-
-    this.setState( prevState => {
-      if (name === "unitNumber") {
-        return {
-          [name]: parseInt(value)
-        }
-      } else {
-        return {
-          [name]: value
-        }
-      }
-    });
+  render() {
+    return (
+      <div>
+        <Alert color='danger' isOpen={this.state.error} toggle={this.onDismiss}>
+          {this.state.errorMessage}
+        </Alert>
+        <SignUpForm onFormSubmit={this.onFormSubmit} onError={this.handleError}/>
+      </div>
+    )
   }
 
-  handleAccountType(accountType) {
-    this.setState({ accountType: parseInt(accountType) })
-  }
+  handleError = message => {
+    this.setState({
+      error: true,
+      errorMessage: message
+    })
+  };
+
+  onDismiss = () => {
+    this.setState({
+      error: false,
+    })
+  };
 
   async onFormSubmit(formData) {
-    this.setState({ request: formData });
     const requestBody = {
       user: {
         name: formData.userName,
@@ -85,19 +83,18 @@ export default class Signup extends Component {
 
         Router.push('/authenticated', '/authenticated');
       } else {
+        this.setState({
+          error: true,
+          errorMessage: data.message
+        });
         console.log(data.message);
       }
     } catch (e) {
+      this.setState({
+        error: true,
+        errorMessage: e.message
+      });
       console.log(e.message);
     }
-  }
-
-  render() {
-    return (
-      <Container isFluid style={{ marginTop: 20 }}>
-        <Title isSize={1} hasTextAlign='centered'>Condovive</Title>
-        <SignUpForm onFormSubmit={this.onFormSubmit}/>
-      </Container>
-    )
   }
 }

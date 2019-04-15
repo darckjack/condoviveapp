@@ -1,27 +1,31 @@
-import { Component } from 'react';
 import Router from "next/router";
-import {
-  Container,
-  Title,
-  Content,
-  Table,
-  Control,
-  Button
-} from 'bloomer';
 import API_URL from "../config/api";
+import UsersTable from "../components/users_table";
+import AccountsTable from "../components/accounts_table";
+import { Alert } from "reactstrap";
 
 
-export default class Authenticated extends Component {
+export default class Authenticated extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       token: "",
-      users: []
+      users: [],
+      loaded: false,
+      error: false,
+      errorMessage: ''
     };
 
     this.logout = this.logout.bind(this);
   }
+
+  handleError = message => {
+    this.setState({
+      error: true,
+      errorMessage: message
+    })
+  };
 
   async componentDidMount() {
     if (localStorage.getItem('token') === null) {
@@ -42,6 +46,7 @@ export default class Authenticated extends Component {
         if (res.ok) {
           this.setState({
             users: data,
+            loaded: true
           });
         } else {
           console.log(data.message);
@@ -57,37 +62,52 @@ export default class Authenticated extends Component {
     Router.push('/', '/');
   }
 
+  onDismiss = () => {
+    this.setState({
+      error: false,
+    })
+  };
+
   render() {
+    let tables = this.state.users.map(user => {
+      return <AccountsTable user_id={ user.id } onError={this.handleError} />
+    });
     return (
-      <Container>
-        <Title isSize={1} hasTextAlign='centered'>Condovive</Title>
-        <Content>
-          <h1>Has accedido correctamente</h1>
-        </Content>
-        <Control>
-          <Table isBordered isStriped>
-            <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Correo Electronico</th>
-            </tr>
-            </thead>
-            <tbody>
-            {this.state.users.map(user => {
-              return (
-                <tr>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                </tr>
-              )
-            })}
-            </tbody>
-          </Table>
-        </Control>
-        <Button onClick={this.logout} style={{ marginTop: 20 }}>Cerrar sesion</Button>
-      </Container>
+      <div>
+        <Alert color='danger' isOpen={this.state.error} toggle={this.onDismiss}>
+          {this.state.errorMessage}
+        </Alert>
+        <div className="row">
+          <div className="col">
+            {
+              this.state.users.length > 0
+              ?
+              <UsersTable users={this.state.users} />
+              :
+              <div className='text-center'>
+                <div className="spinner-border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </div>
+            }
+            <button className="btn btn-primary" onClick={this.logout} style={{ marginTop: 20 }}>Cerrar sesion</button>
+          </div>
+          <div className="col">
+            {
+              this.state.users.length > 0
+                ?
+                tables
+                :
+                <div className='text-center'>
+                  <div className="spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </div>
+            }
+          </div>
+        </div>
+
+      </div>
     );
   }
 }
